@@ -7,6 +7,13 @@ ini_set('allow_url_fopen', 'on');
  *
  * this class can only be used for UCI Students, it will access the directory 
  * and construct an object based on the users UCInetID.
+ *
+ * Privacy Notice: This campus [UC Irvine] directory has been compiled for the 
+ * use and convenience of the faculty, staff and students of the University of 
+ * California, Irvine and others dealing with UCI. It is the property of the 
+ * Regents of the University of California. In accordance with the California 
+ * Information Practices Act, neither this directory nor the information contained 
+ * herein may be used, rented, distributed, or sold for commercial purposes.
  * 
  *
  * @author Sean Burke, http://www.seantburke.com
