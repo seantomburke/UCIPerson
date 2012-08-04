@@ -1,7 +1,5 @@
 <?php
 
-ini_set('allow_url_fopen', 'on');
-
 /**
  * Page UCIPerson Class
  *
