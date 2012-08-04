@@ -1,5 +1,7 @@
 <?php
 
+ini_set('allow_url_fopen', 'on');
+
 /**
  * Page UCIPerson Class
  *
@@ -61,14 +63,18 @@ class UCIPerson
 			$this->ucinetid = $id;
 			$this->search_url = 'http://directory.uci.edu/index.php?uid='.$this->ucinetid.'&form_type=plaintext';
 				
-			$data = file_get_contents($this->search_url);
+			//$data = file_get_contents($this->search_url);
+			
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $this->search_url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			$data = curl_exec($ch);
+			curl_close($ch);
 
 			$data = trim($data);
 			$error_string = strpos($data, 'rror:');
 
 			$pos = ($error_string) ? $error_string-1: strpos($data, '<body>')+8;
-				
-
 			$data = substr($data, $pos);
 			$data_array = explode('<br/>', $data);
 			$this->user_array = array();
@@ -97,7 +103,7 @@ class UCIPerson
 			$this->is_valid = !(isset($this->user_array['error']));
 			if(!$this->is_valid)
 			{
-				$this->error = '<strong>'.$this->ucinetid.'</strong> is not a valid UCInetID';
+				$this->error = $this->ucinetid.' is not a valid UCInetID';
 			}
 		}
 		return $this->is_valid;
